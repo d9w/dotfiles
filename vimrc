@@ -3,7 +3,6 @@ scriptencoding utf-8
 runtime macros/matchit.vim
 
 set runtimepath+=~/.vim/bundle/vundle/
-set runtimepath+=~/.vim/bundle/powerline/powerline/bindings/vim
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
@@ -16,14 +15,16 @@ Bundle 'mileszs/ack.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
-Bundle 'sjbach/lusty'
+Bundle 'kien/ctrlp.vim'
+Bundle 'troydm/easybuffer.vim'
+Bundle 'majutsushi/tagbar'
 Bundle 'sjl/gundo.vim'
 Bundle 'slack/vim-bufexplorer'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
-Bundle 'Lokaltog/powerline'
+Bundle 'bling/vim-airline'
 
 " snipmate
 Bundle "MarcWeber/vim-addon-mw-utils"
@@ -34,9 +35,6 @@ Bundle "garbas/vim-snipmate"
 Bundle 'YankRing.vim'
 "Bundle 'a'
 Bundle 'bufkill.vim'
-
-" non-github git
-Bundle 'git://git.wincent.com/command-t.git'
 
 " {{{ useful options
 set autoindent
@@ -249,10 +247,10 @@ nnoremap <F4> :cnext<CR>
 nnoremap <S-F3> [c
 nnoremap <S-F4> ]c
 nnoremap <F5> :Gstatus<CR>
-nnoremap <F6> :GundoToggle<CR>
+" nnoremap <F6> :GundoToggle<CR>
 nnoremap <F7> :NERDTreeToggle<CR>
 nnoremap <F8> :call Taglist_Toggle()<CR>
-nnoremap <F9> :LustyJuggler<CR>
+nnoremap <F9> <Esc>:quit<CR>
 noremap <F10> <Esc>:quit<CR>
 noremap <S-F10> <Esc>:quitall!<CR>
 noremap <M-F10> <Esc>:BD<CR>
@@ -295,8 +293,7 @@ au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 "au BufRead,BufNewFile * match WhitespaceErrors /\s\+$/
 
 set background=dark
-" colorscheme Tomorrow-Night-Bright
-colorscheme delek
+colorscheme koehler
 " }}}
 
 if has('cscope')
