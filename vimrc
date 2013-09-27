@@ -25,6 +25,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'bling/vim-airline'
+Bundle 'JuliaLang/julia-vim'
 
 " snipmate
 Bundle "MarcWeber/vim-addon-mw-utils"
