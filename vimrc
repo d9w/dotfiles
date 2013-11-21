@@ -51,17 +51,17 @@ set incsearch
 set laststatus=2
 set list listchars=tab:»\ ,trail:·
 set modeline
-set nocursorline
+set cursorline
 set nofoldenable
-set nowrap
+set wrap
 set number
 set pastetoggle=<Leader>+
 set path+=.;,./**
 set scrolloff=5
-set shiftwidth=4 tabstop=4
 set showbreak=…
 set showcmd
 set showmatch
+set spell
 set spelllang=en_us
 set switchbuf=useopen,usetab
 set tags+=/
@@ -229,6 +229,7 @@ nnoremap <Space> za
 nnoremap <silent> <Leader><Space> :setl foldenable!<CR>
 noremap N Nzz
 noremap n nzz
+map! jj <ESC>
 
 " remarkably, Nul is acatually C-Space
 imap <Nul> <C-x><C-o>
@@ -250,7 +251,6 @@ nnoremap <S-F4> ]c
 nnoremap <F5> :Gstatus<CR>
 " nnoremap <F6> :GundoToggle<CR>
 nnoremap <F7> :NERDTreeToggle<CR>
-nnoremap <F8> :call Taglist_Toggle()<CR>
 nnoremap <F9> <Esc>:quit<CR>
 noremap <F10> <Esc>:quit<CR>
 noremap <S-F10> <Esc>:quitall!<CR>
