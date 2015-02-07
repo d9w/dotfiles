@@ -1,16 +1,18 @@
 scriptencoding utf-8
+set nocompatible
+filetype off
 
 runtime macros/matchit.vim
 
-set runtimepath+=~/.vim/bundle/vundle/
-call vundle#rc()
+set runtimepath+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
+Bundle 'gmarik/Vundle.vim'
 
 " github
 Bundle 'ervandew/supertab'
 Bundle 'godlygeek/tabular'
-Bundle 'mattn/zencoding-vim'
+Bundle 'mattn/emmet-vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'scrooloose/nerdcommenter'
@@ -36,6 +38,8 @@ Bundle "garbas/vim-snipmate"
 Bundle 'YankRing.vim'
 "Bundle 'a'
 Bundle 'bufkill.vim'
+
+call vundle#end()
 
 " {{{ useful options
 set autoindent
@@ -84,6 +88,9 @@ endif
 au BufRead,BufNewFile * let b:args=''
 
 let python_highlight_all=1
+
+" airline
+let g:airline_theme = 'jellybeans'
 
 " gundo
 let g:gundo_right = 1
@@ -270,7 +277,6 @@ imap <M-F11> <Esc><M-F11>
 filetype plugin indent on
 syntax on
 
-au BufRead,BufNewFile *.txt setlocal wrapmargin=2 textwidth=78 formatoptions+=a spell
 au FileType * exec 'setlocal dict='.substitute($VIMRUNTIME, ' ', '\\\ ', 'g').'/syntax/'.&filetype.'.vim,'.&dict
 au FileType mail setlocal spell
 au FileType rst setlocal noexpandtab wrapmargin=2 textwidth=78 formatoptions+=a spell
