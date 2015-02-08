@@ -12,6 +12,9 @@ set -x LESS_TERMCAP_so (printf "\e[01;44;33m")
 set -x LESS_TERMCAP_ue (printf "\e[0m")
 set -x LESS_TERMCAP_us (printf "\e[01;32m")
 
+# Disable virtual env prompt
+set -x VIRTUAL_ENV_DISABLE_PROMPT True
+
 # prompts
 . ~/.config/fish/helpers.fish
 . ~/.config/fish/fish_prompt.fish

@@ -41,14 +41,14 @@ end
 function show_virtualenv -d "Show the virtualenv"
   if set -q VIRTUAL_ENV
     set -l vname (basename "$VIRTUAL_ENV")
-    prompt_segment normal white "[$vname]"
+    prompt_segment white black "[$vname]"
   end
 end
 
 ## SHOW PROMPT
 function fish_prompt
   show_ssh_status
-#  show_virtualenv
+  show_virtualenv
   show_user
   show_pwd
   show_prompt
