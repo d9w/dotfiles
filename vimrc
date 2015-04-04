@@ -300,7 +300,7 @@ au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 "au BufRead,BufNewFile * match WhitespaceErrors /\s\+$/
 
 set background=dark
-colorscheme koehler
+colorscheme Tomorrow-Night-Bright
 " }}}
 
 if has('cscope')
