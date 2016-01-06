@@ -1,3 +1,4 @@
+#!/bin/bash
 for file in *
-  do [ "$file" != "init.sh" ] && ln -s $(pwd)/$file ~/.$file
+  do [ "$file" != "init.sh" ] && [ ! -e ~/.$file ] && ln -s $(pwd)/$file ~/.$file
 done
