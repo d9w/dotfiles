@@ -49,7 +49,7 @@ end
 function fish_prompt
   show_ssh_status
   show_virtualenv
-  show_user
+  #show_user
   show_pwd
   show_prompt
 end
