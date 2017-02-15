@@ -1,5 +1,5 @@
 [user]
 	name = Dennis Wilson
-	email = d9w@mit.edu
+	email = dennis@d9w.xyz
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit

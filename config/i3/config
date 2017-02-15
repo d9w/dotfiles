@@ -1,0 +1,217 @@
+# i3 config file (v4)
+# Dennis Wilson, d9w.xyz
+set $mod Mod4
+
+for_window [class="^.*"] border pixel 0
+gaps inner 6
+gaps outer 6
+smart_gaps on
+smart_borders on
+
+# Font for window titles and bar
+# font pango:monospace 8
+font pango:Droid Sans Mono 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec st
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move in a grid, currently 2x2
+bindsym $mod+Shift+h exec --no-startup-id i3-grid left
+bindsym $mod+Shift+j exec --no-startup-id i3-grid down
+bindsym $mod+Shift+k exec --no-startup-id i3-grid up
+bindsym $mod+Shift+l exec --no-startup-id i3-grid right
+
+# switch to workspace
+bindsym $mod+0 workspace 0
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# xclip for copy paste behavior
+bindsym $mod+p exec xclip -o -selection clipboard | xclip
+bindsym $mod+x exec xclip -o | xclip -i -selection clipboard
+
+# volume buttons
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -5%
+bindsym XF86AudioMute exec pactl set-sink-mute 1 toggle
+
+# Movement mode
+set $mode_move Move (h) left, (j) down, (k) up, (l) right, (1-10) move to workspace n
+mode "$mode_move" {
+  bindsym h move left
+  bindsym j move down
+  bindsym k move up
+  bindsym l move right
+
+  bindsym Left move left
+  bindsym Down move down
+  bindsym Up move up
+  bindsym Right move right
+
+  bindsym 0 move container to workspace 0
+  bindsym 1 move container to workspace 1
+  bindsym 2 move container to workspace 2
+  bindsym 3 move container to workspace 3
+  bindsym 4 move container to workspace 4
+  bindsym 5 move container to workspace 5
+  bindsym 6 move container to workspace 6
+  bindsym 7 move container to workspace 7
+  bindsym 8 move container to workspace 8
+  bindsym 9 move container to workspace 9
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+m mode "$mode_move"
+
+# Layout mode, with the option of going into launcher mode
+# Useful for launching a new window with a specific layout, if unsure of current layout mode
+set $mode_layout Layout (h) H split, (v) V split, (s) stacking, (w) tabbed, (e) split, (n) launcher mode
+mode "$mode_layout" {
+  bindsym h split h
+  bindsym v split v
+  bindsym s layout stacking
+  bindsym w layout tabbed
+  bindsym e layout toggle split
+
+  bindsym n mode "$mode_launcher"
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+o mode "$mode_layout"
+
+# Launcher mode, for new windows. Goes back to default mode
+set $mode_launcher Launcher (c) chromium, (g) gimp, (m) mendeley, (z) zeal, (s) st, (e) emacs, (t) thunderbird, (h) thunar
+mode "$mode_launcher" {
+  bindsym c exec chromium, mode "default"
+  bindsym f exec firefox, mode "default"
+  bindsym g exec gimp, mode "default"
+  bindsym m exec mendeleydesktop, mode "default"
+  bindsym z exec zeal, mode "default"
+  bindsym s exec st, mode "default"
+  bindsym e exec emacs, mode "default"
+  bindsym t exec thunderbird, mode "default"
+  bindsym h exec thunar, mode "default"
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+n mode "$mode_launcher"
+
+# Resize mode
+set $mode_resize Resize (h) shrink w, (j) grow h, (k) shrink h, (l) grow w
+mode "$mode_resize" {
+  bindsym h resize shrink width 10 px or 10 ppt
+  bindsym j resize grow height 10 px or 10 ppt
+  bindsym k resize shrink height 10 px or 10 ppt
+  bindsym l resize grow width 10 px or 10 ppt
+
+  bindsym Left resize shrink width 10 px or 10 ppt
+  bindsym Down resize grow height 10 px or 10 ppt
+  bindsym Up resize shrink height 10 px or 10 ppt
+  bindsym Right resize grow width 10 px or 10 ppt
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+r mode "$mode_resize"
+
+# System mode, returns to default after every command
+set $Locker i3lock -t -i /usr/share/pixmaps/back.png && sleep 1
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+s mode "$mode_system"
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+bindsym --release $mod+x exec --no-startup-id import /tmp/latest-screenshot.png
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Start i3bar to display a workspace bar, with colors
+bar {
+  status_command i3status
+  colors {
+    separator #AAAAAA
+    background #1f2326
+    statusline #FFFFFF
+    focused_workspace #9FCA56 #9FCA56 #151718
+    active_workspace #DCCD69 #DCCD69 #151718
+    inactive_workspace #1f2326 #1f2326 #AAAAAA
+    urgent_workspace #CE4045 #CE4045 #FFFFFF
+  }
+}
+# more colors
+client.focused #4F99D3 #4F99D3 #151718 #9FCA56
+client.focused_inactive #9FCA56 #9FCA56 #151718 #A074C4
+client.unfocused #1f2326 #1f2326 #AAAAAA #A074C4
+client.urgent #CE4045 #CE4045 #FFFFFF #DCCD69
+
+# 
+new_window none
+# hide v and h edge borders
+hide_edge_borders both
+# jump between workspaces by pressing the same key
+workspace_auto_back_and_forth yes
+
+# keymap here because its one config file
+exec --no-startup-id setxkbmap -option ctrl:nocaps

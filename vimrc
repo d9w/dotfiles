@@ -257,7 +257,7 @@ nnoremap <S-F3> [c
 nnoremap <S-F4> ]c
 nnoremap <F5> :Gstatus<CR>
 " nnoremap <F6> :GundoToggle<CR>
-nnoremap <F7> :NERDTreeToggle<CR>
+nnoremap <Esc> :NERDTreeToggle<CR>
 nnoremap <F9> <Esc>:quit<CR>
 noremap <F10> <Esc>:quit<CR>
 noremap <S-F10> <Esc>:quitall!<CR>
@@ -289,6 +289,7 @@ au FileType c,cpp nnoremap <F5> :exec '!./%:r ' . b:args<CR>
 au FileType c noremap <C-F12> :!ctags -R --sort=foldcase --c-kinds=+pl --fields=+S .<CR>
 au FileType cpp noremap <C-F12> :!ctags -R --sort=foldcase --c++-kinds=+pl --fields=+iaS --extra=+q .<CR>
 au FileType cpp set tags+=~/.vim/tags/cpp,~/.vim/tags/boost,~/.vim/tags/qt4,~/.vim/tags/kde
+au FileType c,cpp set noexpandtab
 au FileType java compiler javac
 au FileType java nnoremap <F5> :exec '!java %:r ' . b:args<CR>
 au FileType java nnoremap <F6> :make %<CR>
