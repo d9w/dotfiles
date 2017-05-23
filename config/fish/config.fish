@@ -33,6 +33,35 @@ function git -d 'Some added git functions'
   command git $argv
 end
 
+function git-recurse
+  if stat .git/config > /dev/null ^&1
+    set -l gnum (git status --short | wc -l)
+    echo (pwd)
+    if test $gnum -gt 0
+      set_color purple
+    else
+      set_color cyan
+    end
+    echo (git config --get remote.origin.url) (git rev-parse --short @) (git rev-parse --abbrev-ref HEAD) $gnum
+    set_color normal
+  else
+    if test (count */) -gt 0
+      for d in *
+        if test (stat --format="%F" $d) = "directory"
+          cd $d
+          git-recurse
+          cd ..
+        end
+      end
+    else
+      set_color red
+      echo (pwd)
+      echo
+      set_color normal
+    end
+  end
+end
+
 # colored man pages
 set -x LESS_TERMCAP_mb (printf "\e[01;31m")
 set -x LESS_TERMCAP_md (printf "\e[01;31m")
