@@ -68,7 +68,7 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -5%
 bindsym XF86AudioMute exec pactl set-sink-mute 1 toggle
 
 # Movement mode
-set $mode_move Move (h) left, (j) down, (k) up, (l) right, (1-10) move to workspace n
+set $mode_move Move (h) left, (j) down, (k) up, (l) right, (1-10) move to workspace n, (Shift+hjkl) directional move workspace, (Shift+0-1) move workspace to output
 mode "$mode_move" {
   bindsym h move left
   bindsym j move down
@@ -90,6 +90,14 @@ mode "$mode_move" {
   bindsym 7 move container to workspace 7
   bindsym 8 move container to workspace 8
   bindsym 9 move container to workspace 9
+
+  bindsym Shift+h move workspace to output left
+  bindsym Shift+j move workspace to output down
+  bindsym Shift+k move workspace to output up
+  bindsym Shift+l move workspace to output right
+
+  bindsym Shift+0 move workspace to output eDP-1
+  bindsym Shift+1 move workspace to output HDMI-1
 
   bindsym Return mode "default"
   bindsym Escape mode "default"
@@ -114,17 +122,18 @@ mode "$mode_layout" {
 bindsym $mod+o mode "$mode_layout"
 
 # Launcher mode, for new windows. Goes back to default mode
-set $mode_launcher Launcher (c) chromium, (g) gimp, (m) mendeley, (z) zeal, (s) st, (e) emacs, (t) thunderbird, (h) thunar
+set $mode_launcher Launcher (c) chromium, (e) emacs, (f) firefox, (g) gimp, (h) thunar, (m) mendeley, (s) slack, (t) thunderbird, (w) wire, (z) zeal
 mode "$mode_launcher" {
   bindsym c exec chromium, mode "default"
+  bindsym e exec emacs, mode "default"
   bindsym f exec firefox, mode "default"
   bindsym g exec gimp, mode "default"
-  bindsym m exec mendeleydesktop, mode "default"
-  bindsym z exec zeal, mode "default"
-  bindsym s exec st, mode "default"
-  bindsym e exec emacs, mode "default"
-  bindsym t exec thunderbird, mode "default"
   bindsym h exec thunar, mode "default"
+  bindsym m exec mendeleydesktop, mode "default"
+  bindsym s exec slack, mode "default"
+  bindsym t exec thunderbird, mode "default"
+  bindsym w exec wire-desktop, mode "default"
+  bindsym z exec zeal, mode "default"
 
   bindsym Return mode "default"
   bindsym Escape mode "default"

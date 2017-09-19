@@ -13,15 +13,17 @@ set PATH /usr/local/sbin /usr/local/bin /usr/bin /usr/bin/site_perl /usr/bin/ven
 #  end
 #end
 
+alias dual_display='xrandr --output eDP-1 --auto --output HDMI-1 --auto --left-of eDP-1'
+
 if status --is-login
   if test -z "$DISPLAY" -a "$XDG_VTNR" -eq "1"
     exec startx -- -keeptty
   end
 end
 
-#function julia -d 'colors default'
-#  command julia --color=yes $argv
-#end
+function julia -d 'colors default'
+  command julia --color=yes $argv
+end
 
 function git -d 'Some added git functions'
   if test (count $argv) -eq 2
@@ -77,8 +79,11 @@ set -x VIRTUAL_ENV_DISABLE_PROMPT True
 # conda venv
 . ~/.config/fish/conda.fish
 
-# MXNet
+# Path variables
 set -x MXNET_HOME /home/d9w/.julia/v0.5/MXNet.jl
+set -x LD_LIBRARY_PATH "$LD_LIBRARY_PATH:/opt/cuda/lib64"
+set -x CUDA_HOME /opt/cuda/
+set -x CUDA_VISIBLE_DEVICES 0
 
 # keyboard settings
 setxkbmap -option compose:ralt
